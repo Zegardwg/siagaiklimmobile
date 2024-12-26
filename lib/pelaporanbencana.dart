@@ -7,82 +7,103 @@ class PelaporanBencanaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pelaporan Bencana', style: TextStyle(fontSize: 18)),
+        title: const Text('Laporan Kejadian'),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {
-              // Handle share action
-            },
-          ),
-        ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Selamat Datang, Test User',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                'Nama Pelapor:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Masukkan Nama Anda',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildStatCard('Kontribusi', '0'),
-                  _buildStatCard('Kejadian', '0'),
-                  _buildStatCard('On Progres', '0'),
-                ],
+              const SizedBox(height: 16),
+              const Text(
+                'Nomor Kontak:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Tambahkan Detail Kejadian',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add event action
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text('Tambah'),
-                  ),
-                ],
+              const SizedBox(height: 8),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Masukkan Nomor Kontak',
+                  border: OutlineInputBorder(),
+                ),
               ),
-              const SizedBox(height: 20),
-              _buildEventCard('Banjir', '06.00.20 2023-12-9', 'Mejayan, Kab. Madiun'),
-              const SizedBox(height: 10),
-              _buildEventCard('Angin Puting Beliung', '14.00.30 2024-10-3', 'Kare, Kab. Madiun'),
-              const SizedBox(height: 20),
-              FloatingActionButton(
-                onPressed: () {
-                  // Add new report action
-                },
-                backgroundColor: Colors.blueAccent,
-                child: const Icon(Icons.add),
+              const SizedBox(height: 16),
+              const Text(
+                'Lokasi Kejadian:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Masukkan Lokasi Kejadian',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Jenis Kejadian:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+                items: const [
+                  DropdownMenuItem(value: 'Kebakaran', child: Text('Kebakaran')),
+                  DropdownMenuItem(value: 'Banjir', child: Text('Banjir')),
+                  DropdownMenuItem(value: 'Kecelakaan', child: Text('Kecelakaan')),
+                ],
+                onChanged: (value) {},
+                hint: const Text('Pilih Jenis Kejadian'),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Waktu Kejadian:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'mm/dd/yyyy --:-- --',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Deskripsi Kejadian:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                maxLines: 4,
+                decoration: const InputDecoration(
+                  hintText: 'Jelaskan detail kejadian',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Lampiran (Foto/Video):',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Choose File'),
               ),
             ],
           ),
@@ -90,91 +111,8 @@ class PelaporanBencanaScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildStatCard(String title, String value) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.blueAccent,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEventCard(String title, String time, String location) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            time,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            location,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
+
+void main() => runApp(const MaterialApp(
+      home: PelaporanBencanaScreen(),
+    ));

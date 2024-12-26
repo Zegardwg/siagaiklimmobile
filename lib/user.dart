@@ -7,107 +7,42 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Profil Pengguna',
-          style: TextStyle(fontSize: 18),
-        ),
+        title: const Text('Profil Pengguna'),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              // Navigate to settings screen
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // User Profile Section
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/images/user_avatar.png'), // Replace with actual asset
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Test User',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'testuser@example.com',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
+            _buildActionCard(
+              icon: Icons.shopping_bag,
+              title: 'Kurangi Penggunaan Plastik',
+              subtitle: 'Kurangi penggunaan plastik sekali pakai dengan membawa tas kain dan botol minum sendiri.',
             ),
-            const SizedBox(height: 20),
-
-            // Stats Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildStatCard('Kontribusi', '5', Colors.blue),
-                _buildStatCard('Kejadian', '12', Colors.green),
-                _buildStatCard('On Progress', '3', Colors.orange),
-              ],
+            const SizedBox(height: 10),
+            _buildActionCard(
+              icon: Icons.lightbulb,
+              title: 'Hemat Listrik di Rumah',
+              subtitle: 'Matikan alat elektronik saat tidak digunakan dan gunakan lampu hemat energi.',
             ),
-            const SizedBox(height: 20),
-
-            // Actions Section
-            Column(
-              children: [
-                _buildActionCard(
-                  context,
-                  icon: Icons.report,
-                  title: 'Lihat Laporan',
-                  subtitle: 'Cek laporan kejadian Anda',
-                  onTap: () {
-                    // Navigate to report screen
-                  },
-                ),
-                const SizedBox(height: 10),
-                _buildActionCard(
-                  context,
-                  icon: Icons.edit,
-                  title: 'Edit Profil',
-                  subtitle: 'Perbarui informasi profil Anda',
-                  onTap: () {
-                    // Navigate to edit profile screen
-                  },
-                ),
-                const SizedBox(height: 10),
-                _buildActionCard(
-                  context,
-                  icon: Icons.logout,
-                  title: 'Logout',
-                  subtitle: 'Keluar dari akun Anda',
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                ),
-              ],
+            const SizedBox(height: 10),
+            _buildActionCard(
+              icon: Icons.park,
+              title: 'Tanam Pohon',
+              subtitle: 'Ikut serta dalam program penghijauan untuk mengurangi emisi karbon di lingkungan Anda.',
+            ),
+            const SizedBox(height: 10),
+            _buildActionCard(
+              icon: Icons.directions_bike,
+              title: 'Gunakan Transportasi Ramah Lingkungan',
+              subtitle: 'Gunakan transportasi umum, sepeda, atau jalan kaki untuk mengurangi emisi kendaraan.',
+            ),
+            const SizedBox(height: 10),
+            _buildActionCard(
+              icon: Icons.delete,
+              title: 'Pisahkan Sampah',
+              subtitle: 'Mulailah memilah sampah organik dan non-organik untuk didaur ulang.',
             ),
           ],
         ),
@@ -115,7 +50,11 @@ class UserScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatCard(String title, String value, Color color) {
+  Widget _buildActionCard({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -129,57 +68,24 @@ class UserScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: Row(
         children: [
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+          CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.blueAccent.withOpacity(0.1),
+            child: Icon(icon, color: Colors.blueAccent),
           ),
-          const SizedBox(height: 5),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionCard(BuildContext context,
-      {required IconData icon, required String title, required String subtitle, required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.blueAccent.withOpacity(0.1),
-              child: Icon(icon, color: Colors.blueAccent),
-            ),
-            const SizedBox(width: 15),
-            Column(
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Text(
@@ -188,8 +94,8 @@ class UserScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

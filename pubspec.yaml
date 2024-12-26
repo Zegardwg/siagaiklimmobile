@@ -66,6 +66,7 @@ flutter:
     - web/assets/peta.png
     - web/assets/peringatan.png
     - web/assets/bumi.png
+    - web/assets/peta.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

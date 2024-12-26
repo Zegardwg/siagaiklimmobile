@@ -43,7 +43,7 @@ class PetaCuacaScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/weather_map.png'), // Replace with actual image path
+                        image: AssetImage('web/assets/peta.png'), // Replace with actual image path
                         fit: BoxFit.cover,
                       ),
                     ),
